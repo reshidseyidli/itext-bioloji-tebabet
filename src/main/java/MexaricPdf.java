@@ -1,0 +1,314 @@
+import com.itextpdf.io.font.FontConstants;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
+import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.border.Border;
+import com.itextpdf.layout.border.SolidBorder;
+import com.itextpdf.layout.element.Cell;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+
+import java.io.IOException;
+
+public class MexaricPdf {
+
+    public void createMexaric() throws IOException {
+
+        //generate olunan PDF 'root' folderde yaranacaq
+        String pdfPath = "mexaric.pdf";
+
+        PdfWriter pdfWriter = new PdfWriter(pdfPath);
+        PdfDocument pdfDocument = new PdfDocument(pdfWriter);
+        pdfDocument.setDefaultPageSize(PageSize.A4);
+
+        Document document = new Document(pdfDocument);
+        document.setTopMargin(10);
+        document.setBottomMargin(0);
+
+        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+        document.setFont(font);
+        document.setFontSize(9f);
+
+        /*****************************************  TABLE - 1  *****************************************/
+
+        Table table1 = new Table(new float[]{200f, 360f});
+
+        table1.addCell(cell("BiOLOJi TəBABeT KLiNiKASi", true, "center", true));
+        table1.addCell(cell("Forma N - KO-2", false, "right", true));
+
+        /*****************************************  TABLE - 2  *****************************************/
+
+        Table table2 = new Table(new float[]{200f, 360f});
+
+        table2.addCell(cell("(muessisenin teskilatin adi)", false, "center", false).setFontSize(7f));
+        table2.addCell(cell("", false, "", false).setFontSize(7f));
+
+        /*****************************************  TABLE - 3  *****************************************/
+
+        Table table3 = new Table(new float[]{180f, 50f, 350f});
+
+        table3.addCell(cell("KASSA MEXARIX ORDENI   NO:", false, "", true));
+        table3.addCell(cell("MX0001", false, "", true));
+        table3.addCell(cell("", false, "", true));
+
+        /*****************************************  TABLE - 4  *****************************************/
+
+        Table table4 = new Table(new float[]{15f, 25f, 40f, 80f, 400f});
+
+        table4.addCell(cell("<", false, "", false).setFontSize(7f));
+        table4.addCell(cell("", true, "", false).setFontSize(7f));
+        table4.addCell(cell(">", false, "", false).setFontSize(7f));
+        table4.addCell(cell("", true, "", false).setFontSize(7f));
+        table4.addCell(cell("2021-ci il", false, "", false));
+
+        /*****************************************  TABLE - 5  *****************************************/
+
+        Table table5 = new Table(new float[]{50f, 130f, 130f, 110f, 140f});
+
+        Cell cell5_11 = new Cell();
+        cell5_11.setBorderLeft(new SolidBorder(1));
+        cell5_11.setBorderTop(new SolidBorder(1));
+
+        Cell cell5_12 = new Cell();
+        cell5_12.setBorderTop(new SolidBorder(1));
+        cell5_12.add("Muxabirlesen hesab, subhesab");
+        cell5_12.setTextAlignment(TextAlignment.CENTER);
+
+        Cell cell5_13 = new Cell();
+        cell5_13.setBorderTop(new SolidBorder(1));
+        cell5_13.add("Analitik uçotun sifri");
+        cell5_13.setTextAlignment(TextAlignment.CENTER);
+
+
+        Cell cell5_14 = new Cell();
+        cell5_14.setBorderTop(new SolidBorder(1));
+        cell5_14.add("Mebleq");
+        cell5_14.setTextAlignment(TextAlignment.CENTER);
+
+        Cell cell5_15 = new Cell();
+        cell5_15.setBorderTop(new SolidBorder(1));
+        cell5_15.setBorderRight(new SolidBorder(1));
+        cell5_15.add("Meqsedli teyinatin sifri");
+        cell5_15.setTextAlignment(TextAlignment.CENTER);
+
+        table5.addCell(cell5_11);
+        table5.addCell(cell5_12);
+        table5.addCell(cell5_13);
+        table5.addCell(cell5_14);
+        table5.addCell(cell5_15);
+
+        //-------------------------------------------------
+
+        Cell cell5_21 = new Cell().setHeight(18f);
+        cell5_21.setBorderLeft(new SolidBorder(1));
+        cell5_21.setBorderBottom(new SolidBorder(1));
+
+        Cell cell5_22 = new Cell();
+        cell5_22.setBorderBottom(new SolidBorder(1));
+
+        Cell cell5_23 = new Cell();
+        cell5_23.setBorderBottom(new SolidBorder(1));
+
+        Cell cell5_24 = new Cell();
+        cell5_24.setBorderBottom(new SolidBorder(1));
+
+        Cell cell5_25 = new Cell();
+        cell5_25.setBorderBottom(new SolidBorder(1));
+        cell5_25.setBorderRight(new SolidBorder(1));
+
+        table5.addCell(cell5_21);
+        table5.addCell(cell5_22);
+        table5.addCell(cell5_23);
+        table5.addCell(cell5_24);
+        table5.addCell(cell5_25);
+
+        /*****************************************  TABLE - 6  *****************************************/
+
+        Table table6 = new Table(new float[]{60f, 500f});
+
+        table6.addCell(cell("Verilsin", false, "", true));
+        table6.addCell(cell("", true, "", false));
+
+        /*****************************************  TABLE - 7  *****************************************/
+
+        Table table7 = new Table(new float[]{60f, 500f});
+
+        table7.addCell(cell("", false, "", false).setFontSize(7f));
+        table7.addCell(cell("(soyadi, adi, atasinin adi)", false, "center", false).setFontSize(7f));
+
+        /*****************************************  TABLE - 8  *****************************************/
+
+        Table table8 = new Table(new float[]{40f, 520f});
+
+        table8.addCell(cell("Esas", false, "", true));
+        table8.addCell(cell("", true, "", false));
+
+        /*****************************************  TABLE - 9  *****************************************/
+
+        Table table9 = new Table(new float[]{90f, 470f});
+
+        table9.addCell(cell("Mebleg (yazi ile)", false, "", true));
+        table9.addCell(cell("", true, "", false));
+
+        /*****************************************  TABLE - 10  *****************************************/
+
+        Table table10 = new Table(new float[]{50f, 510f});
+
+        table10.addCell(cell("Elave", false, "", false));
+        table10.addCell(cell("", true, "", false));
+
+        /*****************************************  TABLE - 11  *****************************************/
+
+        Table table11 = new Table(new float[]{45f, 205f, 150f, 160f});
+
+        table11.addCell(cell("Rehber:", false, "", true).setItalic());
+        table11.addCell(cell("", true, "", false));
+
+        table11.addCell(cell("Bas (boyuk) muhasib:", false, "right", true).setItalic());
+        table11.addCell(cell("", true, "", false));
+
+        /*****************************************  TABLE - 12  *****************************************/
+
+        Table table12 = new Table(new float[]{110f, 450f});
+
+        table12.addCell(cell("Aldim (yazi ile)", false, "", true));
+        table12.addCell(cell("", true, "", false));
+
+        /*****************************************  TABLE - 13  *****************************************/
+
+        Table table13 = new Table(new float[]{40f, 140f, 100f, 100f, 180});
+
+        table13.addCell(cell("Tarix:", false, "", true));
+        table13.addCell(cell("", true, "", false));
+
+        table13.addCell(cell("Imza:", false, "right", true));
+        table13.addCell(cell("", true, "", false));
+
+        table13.addCell(cell("", false, "", false));
+
+        /*****************************************  TABLE - 14  *****************************************/
+
+        Table table14 = new Table(new float[]{40f, 520f});
+
+        table14.addCell(cell("Uzre", false, "", true));
+        table14.addCell(cell("", true, "", false));
+
+        /*****************************************  TABLE - 15  *****************************************/
+
+        Table table15 = new Table(new float[]{40f, 520f});
+
+        table15.addCell(cell("", false, "", false).setFontSize(7f));
+        table15.addCell(cell("(Saxsiyyeti mueyyen eden senedin adi, seriyasi, nomresi, verildiyi yer ve tarix)", false, "center", false).setFontSize(7f));
+
+        /*****************************************  TABLE - 16  *****************************************/
+
+        Table table16 = new Table(new float[]{120f, 190f, 250f});
+
+        table16.addCell(cell("Xezinadar tehvil verdi:", false, "", false));
+        table16.addCell(cell("", true, "", false));
+        table16.addCell(cell("", false, "", false));
+
+        /*****************************************  TABLE - 17/1  *****************************************/
+
+        Table table17_1 = new Table(new float[]{420f, 140f});
+
+        table17_1.addCell(cell("", false, "", false));
+        table17_1.addCell(cell("Vereq 01", false, "", false));
+
+        /*****************************************  TABLE - 17/2  *****************************************/
+
+        Table table17_2 = new Table(new float[]{420f, 140f});
+
+        table17_2.addCell(cell("", false, "", false));
+        table17_2.addCell(cell("Vereq 02", false, "", false));
+
+
+        /*******************************************  E N D  *******************************************/
+
+
+        document.add(table1);
+        document.add(table2);
+        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(table3);
+        document.add(table4);
+        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(table5);
+        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(table6);
+        document.add(table7);
+        document.add(table8);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table9);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table10);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table11);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table12);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table13);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table14);
+        document.add(table15);
+        document.add(table16);
+        document.add(table17_1);
+
+        document.add(new Paragraph("\n").setFontSize(30f));
+
+        document.add(table1);
+        document.add(table2);
+        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(table3);
+        document.add(table4);
+        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(table5);
+        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(table6);
+        document.add(table7);
+        document.add(table8);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table9);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table10);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table11);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table12);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table13);
+        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(table14);
+        document.add(table15);
+        document.add(table16);
+        document.add(table17_2);
+
+        document.close();
+        System.out.println("PDF created");
+    }
+
+    private Cell cell(String value, boolean bottomBorder, String align, boolean bold) {
+        Cell cell = new Cell();
+        cell.add(value);
+        cell.setBorder(Border.NO_BORDER);
+
+        if (bold) {
+            cell.setBold();
+        }
+
+        if (bottomBorder) {
+            cell.setBorderBottom(new SolidBorder(0));
+        }
+
+        if (align.equalsIgnoreCase("right")) {
+            cell.setTextAlignment(TextAlignment.RIGHT);
+        } else if (align.equalsIgnoreCase("center")) {
+            cell.setTextAlignment(TextAlignment.CENTER);
+        }
+        return cell;
+    }
+
+}
