@@ -10,8 +10,12 @@ import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.font.FontProvider;
+import com.itextpdf.layout.font.FontSet;
+import com.itextpdf.layout.property.Property;
 import com.itextpdf.layout.property.TextAlignment;
 
+import javax.swing.text.StyleConstants;
 import java.io.IOException;
 
 public class MexaricPdf {
@@ -29,15 +33,23 @@ public class MexaricPdf {
         document.setTopMargin(10);
         document.setBottomMargin(0);
 
-        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
-        document.setFont(font);
+//        final FontSet fontSet = new FontSet();
+//        fontSet.addFont("fonts/arial.ttf");
+//        document.setFontProvider(new FontProvider(fontSet));
+//        document.setProperty(Property.FONT, new String[]{"MyFontFamilyName"});
+
+        PdfFont normalFont = PdfFontFactory.createFont("C:\\Windows\\Fonts\\arial.ttf", "Identity-H", true);
+//        PdfFont normalFont = PdfFontFactory.createFont("fonts/azerlat.ttf", "Identity-H", true);
+//        FontConstants ce_langs_support_font = PdfFontFactory.getRegisteredFonts(StyleConstants.FontConstants.FontFamily.TIMES_ROMAN.name(), "Identity-H", true);
+//        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+        document.setFont(normalFont);
         document.setFontSize(9f);
 
         /*****************************************  TABLE - 1  *****************************************/
 
         Table table1 = new Table(new float[]{200f, 360f});
 
-        table1.addCell(cell("BiOLOJi TəBABeT KLiNiKASi", true, "center", true));
+        table1.addCell(cell("BİOLOJİ TƏBABƏT KLİNİKASI", true, "center", true));
         table1.addCell(cell("Forma N - KO-2", false, "right", true));
 
         /*****************************************  TABLE - 2  *****************************************/
@@ -291,6 +303,8 @@ public class MexaricPdf {
         document.add(table17_2);
 
         document.close();
+        pdfDocument.close();
+        pdfWriter.close();
         System.out.println("PDF created");
     }
 
