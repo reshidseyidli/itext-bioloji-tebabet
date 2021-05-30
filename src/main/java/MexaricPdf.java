@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class MexaricPdf {
 
-    public void createMexaric() throws IOException {
+    public void createMexaric(Entity entity) throws IOException {
 
         //generate olunan PDF 'root' folderde yaranacaq
         String pdfPath = "mexaric.pdf";
@@ -60,9 +60,9 @@ public class MexaricPdf {
         Table table4 = new Table(new float[]{15f, 25f, 40f, 80f, 400f});
 
         table4.addCell(cell("<", false, "", false).setFontSize(7f));
-        table4.addCell(cell("", true, "", false).setFontSize(7f));
+        table4.addCell(cell(entity.getOrdenDay(), true, "", false).setFontSize(7f));
         table4.addCell(cell(">", false, "", false).setFontSize(7f));
-        table4.addCell(cell("", true, "", false).setFontSize(7f));
+        table4.addCell(cell(entity.getOrdenMonth(), true, "", false).setFontSize(7f));
         table4.addCell(cell("2021-ci il", false, "", false));
 
         /*****************************************  TABLE - 5  *****************************************/
@@ -109,16 +109,20 @@ public class MexaricPdf {
 
         Cell cell5_22 = new Cell();
         cell5_22.setBorderBottom(new SolidBorder(1));
+        cell5_22.add(entity.getTableSubHesab());
 
         Cell cell5_23 = new Cell();
         cell5_23.setBorderBottom(new SolidBorder(1));
+        cell5_23.add(entity.getTableAnalitikUcotSifr());
 
         Cell cell5_24 = new Cell();
         cell5_24.setBorderBottom(new SolidBorder(1));
+        cell5_24.add(entity.getTableMebleq());
 
         Cell cell5_25 = new Cell();
         cell5_25.setBorderBottom(new SolidBorder(1));
         cell5_25.setBorderRight(new SolidBorder(1));
+        cell5_25.add(entity.getTableMeqsedTeyinatSift());
 
         table5.addCell(cell5_21);
         table5.addCell(cell5_22);
@@ -131,7 +135,7 @@ public class MexaricPdf {
         Table table6 = new Table(new float[]{60f, 500f});
 
         table6.addCell(cell("Verilsin", false, "", true));
-        table6.addCell(cell("", true, "", false));
+        table6.addCell(cell(entity.getVerilsinFullName(), true, "", false));
 
         /*****************************************  TABLE - 7  *****************************************/
 
@@ -145,48 +149,48 @@ public class MexaricPdf {
         Table table8 = new Table(new float[]{40f, 520f});
 
         table8.addCell(cell("Esas", false, "", true));
-        table8.addCell(cell("", true, "", false));
+        table8.addCell(cell(entity.getEsas(), true, "", false));
 
         /*****************************************  TABLE - 9  *****************************************/
 
         Table table9 = new Table(new float[]{90f, 470f});
 
         table9.addCell(cell("Mebleg (yazi ile)", false, "", true));
-        table9.addCell(cell("", true, "", false));
+        table9.addCell(cell(entity.getMeblegYaziIle(), true, "", false));
 
         /*****************************************  TABLE - 10  *****************************************/
 
         Table table10 = new Table(new float[]{50f, 510f});
 
         table10.addCell(cell("Elave", false, "", false));
-        table10.addCell(cell("", true, "", false));
+        table10.addCell(cell(entity.getElave(), true, "", false));
 
         /*****************************************  TABLE - 11  *****************************************/
 
         Table table11 = new Table(new float[]{45f, 205f, 150f, 160f});
 
         table11.addCell(cell("Rehber:", false, "", true).setItalic());
-        table11.addCell(cell("", true, "", false));
+        table11.addCell(cell(entity.getRehber(), true, "", false));
 
         table11.addCell(cell("Bas (boyuk) muhasib:", false, "right", true).setItalic());
-        table11.addCell(cell("", true, "", false));
+        table11.addCell(cell(entity.getBasBoyukMuhasib(), true, "", false));
 
         /*****************************************  TABLE - 12  *****************************************/
 
         Table table12 = new Table(new float[]{110f, 450f});
 
         table12.addCell(cell("Aldim (yazi ile)", false, "", true));
-        table12.addCell(cell("", true, "", false));
+        table12.addCell(cell(entity.getAldimYaziIle(), true, "", false));
 
         /*****************************************  TABLE - 13  *****************************************/
 
         Table table13 = new Table(new float[]{40f, 140f, 100f, 100f, 180});
 
         table13.addCell(cell("Tarix:", false, "", true));
-        table13.addCell(cell("", true, "", false));
+        table13.addCell(cell(entity.getTarix().toString(), true, "", false));
 
         table13.addCell(cell("Imza:", false, "right", true));
-        table13.addCell(cell("", true, "", false));
+        table13.addCell(cell(entity.getImza(), true, "", false));
 
         table13.addCell(cell("", false, "", false));
 
@@ -195,7 +199,7 @@ public class MexaricPdf {
         Table table14 = new Table(new float[]{40f, 520f});
 
         table14.addCell(cell("Uzre", false, "", true));
-        table14.addCell(cell("", true, "", false));
+        table14.addCell(cell(entity.getUzre(), true, "", false));
 
         /*****************************************  TABLE - 15  *****************************************/
 
@@ -209,7 +213,7 @@ public class MexaricPdf {
         Table table16 = new Table(new float[]{120f, 190f, 250f});
 
         table16.addCell(cell("Xezinadar tehvil verdi:", false, "", false));
-        table16.addCell(cell("", true, "", false));
+        table16.addCell(cell(entity.getXezinedatTehvil(), true, "", false));
         table16.addCell(cell("", false, "", false));
 
         /*****************************************  TABLE - 17/1  *****************************************/
@@ -301,6 +305,7 @@ public class MexaricPdf {
 
         if (bottomBorder) {
             cell.setBorderBottom(new SolidBorder(0));
+            cell.setTextAlignment(TextAlignment.CENTER);
         }
 
         if (align.equalsIgnoreCase("right")) {
