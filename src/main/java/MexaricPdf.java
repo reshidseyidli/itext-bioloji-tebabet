@@ -1,7 +1,7 @@
-import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
+import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -10,12 +10,8 @@ import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
-import com.itextpdf.layout.font.FontProvider;
-import com.itextpdf.layout.font.FontSet;
-import com.itextpdf.layout.property.Property;
 import com.itextpdf.layout.property.TextAlignment;
 
-import javax.swing.text.StyleConstants;
 import java.io.IOException;
 
 public class MexaricPdf {
@@ -33,15 +29,7 @@ public class MexaricPdf {
         document.setTopMargin(10);
         document.setBottomMargin(0);
 
-//        final FontSet fontSet = new FontSet();
-//        fontSet.addFont("fonts/arial.ttf");
-//        document.setFontProvider(new FontProvider(fontSet));
-//        document.setProperty(Property.FONT, new String[]{"MyFontFamilyName"});
-
-        PdfFont normalFont = PdfFontFactory.createFont("C:\\Windows\\Fonts\\arial.ttf", "Identity-H", true);
-//        PdfFont normalFont = PdfFontFactory.createFont("fonts/azerlat.ttf", "Identity-H", true);
-//        FontConstants ce_langs_support_font = PdfFontFactory.getRegisteredFonts(StyleConstants.FontConstants.FontFamily.TIMES_ROMAN.name(), "Identity-H", true);
-//        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+        PdfFont normalFont = PdfFontFactory.createFont("fonts/arial.ttf", "Identity-H", true);
         document.setFont(normalFont);
         document.setFontSize(9f);
 
@@ -49,21 +37,21 @@ public class MexaricPdf {
 
         Table table1 = new Table(new float[]{200f, 360f});
 
-        table1.addCell(cell("BİOLOJİ TƏBABƏT KLİNİKASI", true, "center", true));
+        table1.addCell(cell("BİOLOJİ  TƏBABƏT  KLİNİKASI", true, "center", true));
         table1.addCell(cell("Forma N - KO-2", false, "right", true));
 
         /*****************************************  TABLE - 2  *****************************************/
 
         Table table2 = new Table(new float[]{200f, 360f});
 
-        table2.addCell(cell("(muessisenin teskilatin adi)", false, "center", false).setFontSize(7f));
+        table2.addCell(cell("(müəssisənin, təşkilatın adı)", false, "center", false).setFontSize(7f));
         table2.addCell(cell("", false, "", false).setFontSize(7f));
 
         /*****************************************  TABLE - 3  *****************************************/
 
         Table table3 = new Table(new float[]{180f, 50f, 350f});
 
-        table3.addCell(cell("KASSA MEXARIX ORDENI   NO:", false, "", true));
+        table3.addCell(cell("KASSA  MƏXARİC  ORDERİ     №", false, "", true));
         table3.addCell(cell("MX0001", false, "", true));
         table3.addCell(cell("", false, "", true));
 
@@ -87,24 +75,24 @@ public class MexaricPdf {
 
         Cell cell5_12 = new Cell();
         cell5_12.setBorderTop(new SolidBorder(1));
-        cell5_12.add("Muxabirlesen hesab, subhesab");
+        cell5_12.add("Müxabirləşən hesab, subhesab");
         cell5_12.setTextAlignment(TextAlignment.CENTER);
 
         Cell cell5_13 = new Cell();
         cell5_13.setBorderTop(new SolidBorder(1));
-        cell5_13.add("Analitik uçotun sifri");
+        cell5_13.add("Analitik uçotun şifri");
         cell5_13.setTextAlignment(TextAlignment.CENTER);
 
 
         Cell cell5_14 = new Cell();
         cell5_14.setBorderTop(new SolidBorder(1));
-        cell5_14.add("Mebleq");
+        cell5_14.add("Məbləğ");
         cell5_14.setTextAlignment(TextAlignment.CENTER);
 
         Cell cell5_15 = new Cell();
         cell5_15.setBorderTop(new SolidBorder(1));
         cell5_15.setBorderRight(new SolidBorder(1));
-        cell5_15.add("Meqsedli teyinatin sifri");
+        cell5_15.add("Məqsədli təyinatın şifri");
         cell5_15.setTextAlignment(TextAlignment.CENTER);
 
         table5.addCell(cell5_11);
@@ -154,44 +142,44 @@ public class MexaricPdf {
         Table table7 = new Table(new float[]{60f, 500f});
 
         table7.addCell(cell("", false, "", false).setFontSize(7f));
-        table7.addCell(cell("(soyadi, adi, atasinin adi)", false, "center", false).setFontSize(7f));
+        table7.addCell(cell("(soyadı, adı, atasının adı)", false, "center", false).setFontSize(7f));
 
         /*****************************************  TABLE - 8  *****************************************/
 
         Table table8 = new Table(new float[]{40f, 520f});
 
-        table8.addCell(cell("Esas", false, "", true));
+        table8.addCell(cell("Əsas", false, "", true));
         table8.addCell(cell(entity.getEsas(), true, "", false));
 
         /*****************************************  TABLE - 9  *****************************************/
 
         Table table9 = new Table(new float[]{90f, 470f});
 
-        table9.addCell(cell("Mebleg (yazi ile)", false, "", true));
+        table9.addCell(cell("Məbləğ (yazı ilə)", false, "", true));
         table9.addCell(cell(entity.getMeblegYaziIle(), true, "", false));
 
         /*****************************************  TABLE - 10  *****************************************/
 
         Table table10 = new Table(new float[]{50f, 510f});
 
-        table10.addCell(cell("Elave", false, "", false));
+        table10.addCell(cell("Əlavə", false, "", false));
         table10.addCell(cell(entity.getElave(), true, "", false));
 
         /*****************************************  TABLE - 11  *****************************************/
 
         Table table11 = new Table(new float[]{45f, 205f, 150f, 160f});
 
-        table11.addCell(cell("Rehber:", false, "", true).setItalic());
+        table11.addCell(cell("Rəhbər:", false, "", true).setItalic());
         table11.addCell(cell(entity.getRehber(), true, "", false));
 
-        table11.addCell(cell("Bas (boyuk) muhasib:", false, "right", true).setItalic());
+        table11.addCell(cell("Baş (böyük) mühasib:", false, "right", true).setItalic());
         table11.addCell(cell(entity.getBasBoyukMuhasib(), true, "", false));
 
         /*****************************************  TABLE - 12  *****************************************/
 
         Table table12 = new Table(new float[]{110f, 450f});
 
-        table12.addCell(cell("Aldim (yazi ile)", false, "", true));
+        table12.addCell(cell(" Aldım   ( yazı  ilə )", false, "", true));
         table12.addCell(cell(entity.getAldimYaziIle(), true, "", false));
 
         /*****************************************  TABLE - 13  *****************************************/
@@ -201,7 +189,7 @@ public class MexaricPdf {
         table13.addCell(cell("Tarix:", false, "", true));
         table13.addCell(cell(entity.getTarix().toString(), true, "", false));
 
-        table13.addCell(cell("Imza:", false, "right", true));
+        table13.addCell(cell("İmza:", false, "right", true));
         table13.addCell(cell(entity.getImza(), true, "", false));
 
         table13.addCell(cell("", false, "", false));
@@ -210,7 +198,7 @@ public class MexaricPdf {
 
         Table table14 = new Table(new float[]{40f, 520f});
 
-        table14.addCell(cell("Uzre", false, "", true));
+        table14.addCell(cell("Üzrə", false, "", true));
         table14.addCell(cell(entity.getUzre(), true, "", false));
 
         /*****************************************  TABLE - 15  *****************************************/
@@ -218,13 +206,13 @@ public class MexaricPdf {
         Table table15 = new Table(new float[]{40f, 520f});
 
         table15.addCell(cell("", false, "", false).setFontSize(7f));
-        table15.addCell(cell("(Saxsiyyeti mueyyen eden senedin adi, seriyasi, nomresi, verildiyi yer ve tarix)", false, "center", false).setFontSize(7f));
+        table15.addCell(cell("(Şəxsiyyəti müəyyən edən sənədin adı, seriyası, nömrəsi, verildiyi yer və tarix)", false, "center", false).setFontSize(7f));
 
         /*****************************************  TABLE - 16  *****************************************/
 
         Table table16 = new Table(new float[]{120f, 190f, 250f});
 
-        table16.addCell(cell("Xezinadar tehvil verdi:", false, "", false));
+        table16.addCell(cell("Xəzinadar təhvil verdi:", false, "", false));
         table16.addCell(cell(entity.getXezinedatTehvil(), true, "", false));
         table16.addCell(cell("", false, "", false));
 
@@ -233,41 +221,40 @@ public class MexaricPdf {
         Table table17_1 = new Table(new float[]{420f, 140f});
 
         table17_1.addCell(cell("", false, "", false));
-        table17_1.addCell(cell("Vereq 01", false, "", false));
+        table17_1.addCell(cell("Vərəq 01", false, "", false));
 
         /*****************************************  TABLE - 17/2  *****************************************/
 
         Table table17_2 = new Table(new float[]{420f, 140f});
 
         table17_2.addCell(cell("", false, "", false));
-        table17_2.addCell(cell("Vereq 02", false, "", false));
+        table17_2.addCell(cell("Vərəq 02", false, "", false));
 
 
         /*******************************************  E N D  *******************************************/
 
-
         document.add(table1);
         document.add(table2);
-        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table3);
         document.add(table4);
-        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table5);
-        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table6);
         document.add(table7);
         document.add(table8);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table9);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table10);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table11);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table12);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table13);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table14);
         document.add(table15);
         document.add(table16);
@@ -277,26 +264,26 @@ public class MexaricPdf {
 
         document.add(table1);
         document.add(table2);
-        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table3);
         document.add(table4);
-        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table5);
-        document.add(new Paragraph("\n").setFontSize(1f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table6);
         document.add(table7);
         document.add(table8);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table9);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table10);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table11);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table12);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table13);
-        document.add(new Paragraph("\n").setFontSize(0.5f));
+        document.add(new Paragraph("\n").setFontSize(0.3f));
         document.add(table14);
         document.add(table15);
         document.add(table16);
