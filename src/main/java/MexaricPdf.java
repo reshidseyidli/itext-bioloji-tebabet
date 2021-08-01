@@ -1,5 +1,3 @@
-package _1;
-
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
