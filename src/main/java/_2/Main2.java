@@ -28,6 +28,6 @@ public class Main2 {
         entity2.setUzre("");
         entity2.setXezinedatTehvil("");
         
-        mexaricPdf2.createMexaric(entity2);
+        mexaricPdf2.createMexaricPdf(entity2);
     }
 }

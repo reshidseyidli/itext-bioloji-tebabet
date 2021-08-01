@@ -4,76 +4,150 @@ import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.PageSize;
-import com.itextpdf.kernel.geom.Rectangle;
 import com.itextpdf.kernel.pdf.PdfDocument;
-import com.itextpdf.kernel.pdf.PdfPage;
 import com.itextpdf.kernel.pdf.PdfWriter;
-import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.border.Border;
 import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 
-import javax.swing.text.StyleConstants;
 import java.io.IOException;
 
 public class MexaricPdf2 {
 
-    public void createMexaric(Entity2 entity2) throws IOException {
-
-        //generate olunan PDF 'root' folderde yaranacaq
+    public void createMexaricPdf(Entity2 entity2) throws IOException {
         String pdfPath = "mexaric_2.pdf";
-
         PdfWriter pdfWriter = new PdfWriter(pdfPath);
         PdfDocument pdfDocument = new PdfDocument(pdfWriter);
 
-        //orientation to landscape
         pdfDocument.setDefaultPageSize(PageSize.A4.rotate());
         pdfDocument.addNewPage();
-
-        PdfPage page = pdfDocument.getPage(1);
-        Rectangle pageRect = new Rectangle(page.getTrimBox());
-        pageRect.applyMargins(30,30,30,30,false);
-        new PdfCanvas(page).setStrokeColor(Color.BLACK).setLineWidth(0.8f).rectangle(pageRect).stroke();
 
         PdfFont normalFont = PdfFontFactory.createFont("fonts/arial.ttf", "Identity-H", true);
 
         Document document = new Document(pdfDocument);
-//        document.setTopMargin(0);
-//        document.setLeftMargin(0);
-//        document.setBottomMargin(30);
-
         document.setFont(normalFont);
-        document.setFontSize(8.5f);
 
-        /*****************************************  TABLE - 1  *****************************************/
+        Table table = new Table(new float[]{420f, 420f});
+        table.setBorderBottom(new SolidBorder(Color.BLACK, 2f));
 
-        Table table1 = new Table(new float[]{350f});
-        table1.addCell(new Cell().add("Bioloji  Təbabət  Klinikası").setTextAlignment(TextAlignment.CENTER));
+        /*****************************************  TABLE - GENERAL  *****************************************/
 
-        /*****************************************  TABLE - 2  *****************************************/
+        Cell cellHeading = new Cell();
+        String headingTxtBioloji = "Bioloji  Təbabət  Klinikası";
+        cellHeading.setTextAlignment(TextAlignment.CENTER);
+        cellHeading.add(headingTxtBioloji);
 
-        Table table2 = new Table(new float[]{350f}).setMarginTop(10f).setMarginBottom(20f);
-        table2.addCell(cell("KASSA MƏDAXİL ORDENİNİN KÜTÜYÜ №", false, "center", false));
+        Cell cellGeneral = new Cell();
+        cellGeneral.setTextAlignment(TextAlignment.CENTER);
 
-        /*****************************************  TABLE - 3  *****************************************/
+        String strSeria = "\nSeria  BTKM  nömrə  M0374\n";
+        String strTarix = "\n<<_____>>_____________2021 ci il.\n";
+        String strKimden = "\nKimden_____________________________________________";
 
-        Table table3 = new Table(new float[]{70f, 70f, 70f, 70f});
+        Cell cellPulOdeyen = new Cell();
+        cellPulOdeyen.setFontSize(8f);
+        String strPulOdeyenin = "(pul odəyənin vəzifəsi, soyadı, adı, atasının adı)";
+        cellPulOdeyen.add(strPulOdeyenin);
 
-        table3.addCell(cell("Seria", false, "", false));
-        table3.addCell(cell("BTKM", true, "", false));
-        table3.addCell(cell("nomre", false, "", false));
-        table3.addCell(cell("BTKM", true, "", false));
+        Cell cellAltXett = new Cell();
+        cellAltXett.add("___________________________________________");
+        cellAltXett.setMarginTop(10f);
+
+        Cell cellShexTesEden = new Cell();
+        cellShexTesEden.setFontSize(8f);
+        String shexTesEd = "(şəxsiyyətini təsdiq edən sənəd, seriyası, nömrəsi, ünvanı)";
+        cellShexTesEden.add(shexTesEd);
+
+        String strNeUcun = "Nə üçün_____________________________________________";
+
+        Cell cellMeqseq = new Cell();
+        cellMeqseq.setFontSize(8f);
+        String meqsed = "(məqsədi aydın yazmaq)";
+        cellMeqseq.add(meqsed);
+
+        String strMebleq = "\nMəbləğ_____________________________________________";
+
+        Cell cellReqem = new Cell();
+        cellReqem.setFontSize(8f);
+        String strReqem = "(rəqəm və yazı ilə tam aydın göstərmək)";
+        cellReqem.add(strReqem);
+
+        Cell cellManQep = new Cell();
+        String strMaqQep = "______________________________________.man______qəp";
+        cellManQep.add(strMaqQep);
 
 
-        /*******************************************  E N D  *******************************************/
+        cellGeneral.add(strSeria);
+        cellGeneral.add(strTarix);
+        cellGeneral.add(strKimden);
+        cellGeneral.add(cellPulOdeyen);
+        cellGeneral.add(cellAltXett);
+        cellGeneral.add(cellShexTesEden);
+        cellGeneral.add(strNeUcun);
+        cellGeneral.add(cellMeqseq);
+        cellGeneral.add(cellAltXett);
+        cellGeneral.add(strMebleq);
+        cellGeneral.add(cellReqem);
 
-        document.add(table1);
-        document.add(table2);
-        document.add(table3);
+        cellGeneral.add(cellManQep);
+
+
+        //----------------------------------------------------------------------------------------------//
+
+        /*****************************************  TABLE - LEFT  *****************************************/
+
+        Table tableLeft = new Table(new float[]{420f});
+        tableLeft.addCell(cellHeading);
+
+        ////////////////////////
+        tableLeft.startNewRow();
+        ////////////////////////
+
+        Cell cell_2_Left = new Cell();
+        String cell_2_LeftTxt = "KASSA  MəDAXİL  ORDENİNİN  KÜTÜYÜ  №";
+        cell_2_Left.setTextAlignment(TextAlignment.CENTER);
+        cell_2_Left.setBorderBottom(new SolidBorder(Color.WHITE, 1f));
+        cell_2_Left.add(cell_2_LeftTxt);
+        cell_2_Left.setMarginTop(10f);
+
+        tableLeft.addCell(cell_2_Left);
+
+        ////////////////////////
+        tableLeft.startNewRow();
+        ////////////////////////
+
+        /*****************************************  TABLE - RIGHT  *****************************************/
+
+        Table tableRight = new Table(new float[]{420f});
+        tableRight.addCell(cellHeading);
+
+        /////////////////////////
+        tableRight.startNewRow();
+        /////////////////////////
+
+        Cell cell_2_Right = new Cell();
+        String cell_2_RightTxt = "KASSA  MəDAXİL  ORDENİ  №";
+        cell_2_Right.setTextAlignment(TextAlignment.CENTER);
+        cell_2_Right.setBorderBottom(new SolidBorder(Color.WHITE, 1f));
+        cell_2_Right.add(cell_2_RightTxt);
+        cell_2_Right.setMarginTop(10f);
+
+        tableRight.addCell(cell_2_Right);
+
+        /*************************************************************************************************/
+
+        tableLeft.addCell(cellGeneral);
+        tableRight.addCell(cellGeneral);
+
+        /*************************************************************************************************/
+
+        table.addCell(tableLeft);
+        table.addCell(tableRight);
+
+        document.add(table);
 
         document.close();
         pdfDocument.close();
